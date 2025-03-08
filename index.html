@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotion Gallery | Understanding Human Emotions | Galleria delle Emozioni</title>
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --bg-color: #121212;
+            --bg-card: #1e1e1e;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-color: #7e57c2;
+            --accent-light: #b085f5;
+            --accent-dark: #4d2c91;
+            --card-hover: #2d2d2d;
+            --border-color: #333333;
+            --trait-bg: #2c2152;
+            --trait-text: #d0bdf4;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background-color: var(--bg-color);
+        }
+        
+        header {
+            background-color: var(--accent-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-weight: 300;
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-secondary);
+        }
+        
+        .emotion-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .emotion-card {
+            background-color: var(--bg-card);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .emotion-card:hover {
+            transform: translateY(-10px);
+            background-color: var(--card-hover);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .emotion-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            filter: brightness(0.9);
+            transition: filter 0.3s ease;
+        }
+        
+        .emotion-card:hover .emotion-image {
+            filter: brightness(1);
+        }
+        
+        .emotion-content {
+            padding: 1.5rem;
+        }
+        
+        .emotion-title {
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+        
+        .emotion-description {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .emotion-traits {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .emotion-traits h4 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .traits-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .trait {
+            background-color: var(--trait-bg);
+            color: var(--trait-text);
+            padding: 0.3rem 0.7rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            border: 1px solid rgba(126, 87, 194, 0.3);
+            transition: all 0.2s ease;
+        }
+        
+        .trait:hover {
+            background-color: var(--accent-dark);
+            transform: scale(1.05);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #0a0a0a;
+            color: var(--text-secondary);
+            margin-top: 3rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            margin-top: 1rem;
+        }
+        
+        .footer-links a {
+            color: var(--accent-light);
+            margin: 0 0.5rem;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .language-switcher {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 100;
+        }
+        
+        .language-btn {
+            background-color: rgba(0,0,0,0.3);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .language-btn:hover {
+            background-color: var(--accent-dark);
+        }
+        
+        .language-btn.active {
+            background-color: var(--accent-color);
+            font-weight: bold;
+        }
+        
+        .italian {
+            display: none;
+        }
+        
+        body.it .english {
+            display: none;
+        }
+        
+        body.it .italian {
+            display: block;
+        }
+        
+        body.it span.english {
+            display: none;
+        }
+        
+        body.it span.italian {
+            display: inline;
+        }
+
+        @media (max-width: 768px) {
+            .emotion-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+            
+            .language-switcher {
+                position: static;
+                display: flex;
+                justify-content: center;
+                gap: 0.5rem;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-switcher">
+        <button class="language-btn active" onclick="switchLanguage('en')">English</button>
+        <button class="language-btn" onclick="switchLanguage('it')">Italiano</button>
+    </div>
+    
+    <header>
+        <h1><span class="english">Emotion Gallery</span><span class="italian">Galleria delle Emozioni</span></h1>
+        <p class="subtitle"><span class="english">Exploring the spectrum of human emotions</span><span class="italian">Esplorando lo spettro delle emozioni umane</span></p>
+    </header>
+    
+    <div class="container">
+        <div class="intro">
+            <h2><span class="english">Understanding Emotions</span><span class="italian">Comprendere le Emozioni</span></h2>
+            <p><span class="english">Emotions are complex psychological states that involve three distinct components: a subjective experience, a physiological response, and a behavioral or expressive response. Below you'll find a gallery of common emotions with descriptions and characteristics.</span><span class="italian">Le emozioni sono stati psicologici complessi che coinvolgono tre componenti distinte: un'esperienza soggettiva, una risposta fisiologica e una risposta comportamentale o espressiva. Di seguito troverai una galleria di emozioni comuni con descrizioni e caratteristiche.</span></p>
+        </div>
+        
+        <div class="emotion-grid">
+            <!-- Joy/Happiness -->
+            <div class="emotion-card">
+                <img src="assets/joy.jpg" alt="Person expressing joy" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title"><span class="english">Joy / Happiness</span><span class="italian">Gioia / Felicità</span></h3>
+                    <p class="emotion-description"><span class="english">Joy is characterized by feelings of pleasure, well-being, and satisfaction. When experiencing joy, people often smile, laugh, and have a sense of vitality and connection.</span><span class="italian">La gioia è caratterizzata da sentimenti di piacere, benessere e soddisfazione. Quando si prova gioia, le persone spesso sorridono, ridono e hanno un senso di vitalità e connessione.</span></p>
+                    <div class="emotion-traits">
+                        <h4><span class="english">Common Traits:</span><span class="italian">Caratteristiche comuni:</span></h4>
+                        <div class="traits-list">
+                            <span class="trait"><span class="english">Smiling</span><span class="italian">Sorriso</span></span>
+                            <span class="trait"><span class="english">Laughter</span><span class="italian">Risata</span></span>
+                            <span class="trait"><span class="english">Elevated mood</span><span class="italian">Umore elevato</span></span>
+                            <span class="trait"><span class="english">Energy</span><span class="italian">Energia</span></span>
+                            <span class="trait"><span class="english">Optimism</span><span class="italian">Ottimismo</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sadness -->
+            <div class="emotion-card">
+                <img src="assets/sadness.jpg" alt="Person expressing sadness" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title"><span class="english">Sadness</span><span class="italian">Tristezza</span></h3>
+                    <p class="emotion-description"><span class="english">Sadness is characterized by feelings of loss, disappointment, and helplessness. It often involves tearfulness, withdrawal, and a need for comfort and connection.</span><span class="italian">La tristezza è caratterizzata da sentimenti di perdita, delusione e impotenza. Spesso comporta lacrime, ritiro sociale e un bisogno di conforto e connessione.</span></p>
+                    <div class="emotion-traits">
+                        <h4><span class="english">Common Traits:</span><span class="italian">Caratteristiche comuni:</span></h4>
+                        <div class="traits-list">
+                            <span class="trait"><span class="english">Tearfulness</span><span class="italian">Lacrimosità</span></span>
+                            <span class="trait"><span class="english">Downcast eyes</span><span class="italian">Occhi abbassati</span></span>
+                            <span class="trait"><span class="english">Slumped posture</span><span class="italian">Postura curva</span></span>
+                            <span class="trait"><span class="english">Withdrawal</span><span class="italian">Isolamento</span></span>
+                            <span class="trait"><span class="english">Low energy</span><span class="italian">Poca energia</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anger -->
+            <div class="emotion-card">
+                <img src="assets/anger.jpg" alt="Person expressing anger" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title"><span class="english">Anger</span><span class="italian">Rabbia</span></h3>
+                    <p class="emotion-description"><span class="english">Anger is a strong feeling of displeasure, antagonism, and hostility. It serves as a signal that boundaries have been crossed or that there's a need to protect oneself or others.</span><span class="italian">La rabbia è un forte sentimento di displiacere, antagonismo e ostilità. Serve come segnale che i confini sono stati superati o che c'è la necessità di proteggere se stessi o gli altri.</span></p>
+                    <div class="emotion-traits">
+                        <h4><span class="english">Common Traits:</span><span class="italian">Caratteristiche comuni:</span></h4>
+                        <div class="traits-list">
+                            <span class="trait"><span class="english">Furrowed brow</span><span class="italian">Sopracciglia aggrottate</span></span>
+                            <span class="trait"><span class="english">Clenched jaw</span><span class="italian">Mascella serrata</span></span>
+                            <span class="trait"><span class="english">Raised voice</span><span class="italian">Voce alzata</span></span>
+                            <span class="trait"><span class="english">Tense muscles</span><span class="italian">Muscoli tesi</span></span>
+                            <span class="trait"><span class="english">Flushed face</span><span class="italian">Viso arrossato</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Fear -->
+            <div class="emotion-card">
+                <img src="assets/fear.png" alt="Person expressing fear" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title"><span class="english">Fear</span><span class="italian">Paura</span></h3>
+                    <p class="emotion-description"><span class="english">Fear is a response to perceived danger or threat. It triggers fight-or-flight responses and prepares the body to respond to potential harm.</span><span class="italian">La paura è una risposta a un pericolo o una minaccia percepita. Innesca risposte di lotta o fuga e prepara il corpo a rispondere a potenziali danni.</span></p>
+                    <div class="emotion-traits">
+                        <h4><span class="english">Common Traits:</span><span class="italian">Caratteristiche comuni:</span></h4>
+                        <div class="traits-list">
+                            <span class="trait"><span class="english">Wide eyes</span><span class="italian">Occhi spalancati</span></span>
+                            <span class="trait"><span class="english">Raised eyebrows</span><span class="italian">Sopracciglia alzate</span></span>
+                            <span class="trait"><span class="english">Rapid breathing</span><span class="italian">Respirazione rapida</span></span>
+                            <span class="trait"><span class="english">Trembling</span><span class="italian">Tremore</span></span>
+                            <span class="trait"><span class="english">Protective posture</span><span class="italian">Postura protettiva</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Surprise -->
+            <div class="emotion-card">
+                <img src="/api/placeholder/400/320" alt="Person expressing surprise" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title"><span class="english">Surprise</span><span class="italian">Sorpresa</span></h3>
+                    <p class="emotion-description"><span class="english">Surprise is a brief emotional state experienced as the result of an unexpected event. It can be positive, negative, or neutral depending on the situation.</span><span class="italian">La sorpresa è un breve stato emotivo sperimentato come risultato di un evento inaspettato. Può essere positiva, negativa o neutra a seconda della situazione.</span></p>
+                    <div class="emotion-traits">
+                        <h4><span class="english">Common Traits:</span><span class="italian">Caratteristiche comuni:</span></h4>
+                        <div class="traits-list">
+                            <span class="trait"><span class="english">Raised eyebrows</span><span class="italian">Sopracciglia alzate</span></span>
+                            <span class="trait"><span class="english">Open mouth</span><span class="italian">Bocca aperta</span></span>
+                            <span class="trait"><span class="english">Widened eyes</span><span class="italian">Occhi spalancati</span></span>
+                            <span class="trait"><span class="english">Gasping</span><span class="italian">Sussulto</span></span>
+                            <span class="trait"><span class="english">Sudden stillness</span><span class="italian">Immobilità improvvisa</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Disgust -->
+            <div class="emotion-card">
+                <img src="/api/placeholder/400/320" alt="Person expressing disgust" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title"><span class="english">Disgust</span><span class="italian">Disgusto</span></h3>
+                    <p class="emotion-description"><span class="english">Disgust is an aversive reaction that evolved to protect us from harmful substances. It's characterized by a strong desire to avoid or expel the offending stimulus.</span><span class="italian">Il disgusto è una reazione avversiva che si è evoluta per proteggerci da sostanze dannose. È caratterizzato da un forte desiderio di evitare o espellere lo stimolo offensivo.</span></p>
+                    <div class="emotion-traits">
+                        <h4><span class="english">Common Traits:</span><span class="italian">Caratteristiche comuni:</span></h4>
+                        <div class="traits-list">
+                            <span class="trait"><span class="english">Disgusted face</span><span class="italian">Viso disgustato</span></span>
+                            <span class="trait"><span class="english">Avoidance</span><span class="italian">Evitamento</span></span>
+                            <span class="trait"><span class="english">Repulsion</span><span class="italian">Repulsione</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Contentment -->
+            <div class="emotion-card">
+                <img src="/api/placeholder/400/320" alt="Person expressing contentment" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title">Contentment</h3>
+                    <p class="emotion-description">Contentment is a peaceful happiness and satisfaction. It's a state of ease and appreciation of the present moment without urgent wants or needs.</p>
+                    <div class="emotion-traits">
+                        <h4>Common Traits:</h4>
+                        <div class="traits-list">
+                            <span class="trait">Relaxed face</span>
+                            <span class="trait">Soft smile</span>
+                            <span class="trait">Calm demeanor</span>
+                            <span class="trait">Steady breathing</span>
+                            <span class="trait">Peaceful expression</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Anxiety -->
+            <div class="emotion-card">
+                <img src="/api/placeholder/400/320" alt="Person expressing anxiety" class="emotion-image">
+                <div class="emotion-content">
+                    <h3 class="emotion-title">Anxiety</h3>
+                    <p class="emotion-description">Anxiety is characterized by feelings of tension, worried thoughts, and physical changes like increased blood pressure. It's a state of unease about future uncertainties.</p>
+                    <div class="emotion-traits">
+                        <h4>Common Traits:</h4>
+                        <div class="traits-list">
+                            <span class="trait">Fidgeting</span>
+                            <span class="trait">Rapid breathing</span>
+                            <span class="trait">Furrowed brow</span>
+                            <span class="trait">Restlessness</span>
+                            <span class="trait">Tense muscles</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <p><span class="english">Emotion Gallery is designed to help understand the complexity and spectrum of human emotions.</span><span class="italian">Galleria delle Emozioni è progettata per aiutare a comprendere la complessità e lo spettro delle emozioni umane.</span></p>
+            <p><span class="english">Images used are placeholders and should be replaced with copyright-free images from sources like Unsplash, Pexels, or Pixabay.</span><span class="italian">Le immagini utilizzate sono segnaposto e dovrebbero essere sostituite con immagini prive di copyright da fonti come Unsplash, Pexels o Pixabay.</span></p>
+            <div class="footer-links">
+                <a href="#"><span class="english">About</span><span class="italian">Chi Siamo</span></a>
+                <a href="#"><span class="english">Research</span><span class="italian">Ricerca</span></a>
+                <a href="#"><span class="english">Contact</span><span class="italian">Contatti</span></a>
+                <a href="#"><span class="english">Privacy Policy</span><span class="italian">Politica sulla Privacy</span></a>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        function switchLanguage(lang) {
+            const body = document.body;
+            const enButton = document.querySelectorAll('.language-btn')[0];
+            const itButton = document.querySelectorAll('.language-btn')[1];
+            
+            if (lang === 'it') {
+                body.classList.add('it');
+                enButton.classList.remove('active');
+                itButton.classList.add('active');
+            } else {
+                body.classList.remove('it');
+                itButton.classList.remove('active');
+                enButton.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
