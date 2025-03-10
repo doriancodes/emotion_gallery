@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emotion Gallery | Understanding Human Emotions | Galleria delle Emozioni</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         /* Reset and base styles */
         * {
@@ -233,6 +234,25 @@
                 margin-top: 1rem;
             }
         }
+        
+        /* Add styles for the GitHub link */
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-light);
+            text-decoration: none;
+            margin: 1rem 0;
+            transition: color 0.2s ease;
+        }
+        
+        .github-link:hover {
+            color: white;
+        }
+        
+        .github-link i {
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -312,7 +332,7 @@
             
             <!-- Fear -->
             <div class="emotion-card">
-                <img src="assets/fear.png" alt="Person expressing fear" class="emotion-image">
+                <img src="assets/fear.jpg" alt="Person expressing fear" class="emotion-image">
                 <div class="emotion-content">
                     <h3 class="emotion-title"><span class="english">Fear</span><span class="italian">Paura</span></h3>
                     <p class="emotion-description"><span class="english">Fear is a response to perceived danger or threat. It triggers fight-or-flight responses and prepares the body to respond to potential harm.</span><span class="italian">La paura è una risposta a un pericolo o una minaccia percepita. Innesca risposte di lotta o fuga e prepara il corpo a rispondere a potenziali danni.</span></p>
@@ -331,7 +351,7 @@
             
             <!-- Surprise -->
             <div class="emotion-card">
-                <img src="/api/placeholder/400/320" alt="Person expressing surprise" class="emotion-image">
+                <img src="assets/surprise.jpg" alt="Person expressing surprise" class="emotion-image">
                 <div class="emotion-content">
                     <h3 class="emotion-title"><span class="english">Surprise</span><span class="italian">Sorpresa</span></h3>
                     <p class="emotion-description"><span class="english">Surprise is a brief emotional state experienced as the result of an unexpected event. It can be positive, negative, or neutral depending on the situation.</span><span class="italian">La sorpresa è un breve stato emotivo sperimentato come risultato di un evento inaspettato. Può essere positiva, negativa o neutra a seconda della situazione.</span></p>
@@ -350,7 +370,7 @@
             
             <!-- Disgust -->
             <div class="emotion-card">
-                <img src="/api/placeholder/400/320" alt="Person expressing disgust" class="emotion-image">
+                <img src="assets/disgust.jpg" alt="Person expressing disgust" class="emotion-image">
                 <div class="emotion-content">
                     <h3 class="emotion-title"><span class="english">Disgust</span><span class="italian">Disgusto</span></h3>
                     <p class="emotion-description"><span class="english">Disgust is an aversive reaction that evolved to protect us from harmful substances. It's characterized by a strong desire to avoid or expel the offending stimulus.</span><span class="italian">Il disgusto è una reazione avversiva che si è evoluta per proteggerci da sostanze dannose. È caratterizzato da un forte desiderio di evitare o espellere lo stimolo offensivo.</span></p>
@@ -364,57 +384,18 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Contentment -->
-            <div class="emotion-card">
-                <img src="/api/placeholder/400/320" alt="Person expressing contentment" class="emotion-image">
-                <div class="emotion-content">
-                    <h3 class="emotion-title">Contentment</h3>
-                    <p class="emotion-description">Contentment is a peaceful happiness and satisfaction. It's a state of ease and appreciation of the present moment without urgent wants or needs.</p>
-                    <div class="emotion-traits">
-                        <h4>Common Traits:</h4>
-                        <div class="traits-list">
-                            <span class="trait">Relaxed face</span>
-                            <span class="trait">Soft smile</span>
-                            <span class="trait">Calm demeanor</span>
-                            <span class="trait">Steady breathing</span>
-                            <span class="trait">Peaceful expression</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Anxiety -->
-            <div class="emotion-card">
-                <img src="/api/placeholder/400/320" alt="Person expressing anxiety" class="emotion-image">
-                <div class="emotion-content">
-                    <h3 class="emotion-title">Anxiety</h3>
-                    <p class="emotion-description">Anxiety is characterized by feelings of tension, worried thoughts, and physical changes like increased blood pressure. It's a state of unease about future uncertainties.</p>
-                    <div class="emotion-traits">
-                        <h4>Common Traits:</h4>
-                        <div class="traits-list">
-                            <span class="trait">Fidgeting</span>
-                            <span class="trait">Rapid breathing</span>
-                            <span class="trait">Furrowed brow</span>
-                            <span class="trait">Restlessness</span>
-                            <span class="trait">Tense muscles</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     
     <footer>
         <div class="footer-content">
             <p><span class="english">Emotion Gallery is designed to help understand the complexity and spectrum of human emotions.</span><span class="italian">Galleria delle Emozioni è progettata per aiutare a comprendere la complessità e lo spettro delle emozioni umane.</span></p>
-            <p><span class="english">Images used are placeholders and should be replaced with copyright-free images from sources like Unsplash, Pexels, or Pixabay.</span><span class="italian">Le immagini utilizzate sono segnaposto e dovrebbero essere sostituite con immagini prive di copyright da fonti come Unsplash, Pexels o Pixabay.</span></p>
-            <div class="footer-links">
-                <a href="#"><span class="english">About</span><span class="italian">Chi Siamo</span></a>
-                <a href="#"><span class="english">Research</span><span class="italian">Ricerca</span></a>
-                <a href="#"><span class="english">Contact</span><span class="italian">Contatti</span></a>
-                <a href="#"><span class="english">Privacy Policy</span><span class="italian">Politica sulla Privacy</span></a>
-            </div>
+            <p><span class="english">Images used are copyright-free from sources like Unsplash, Pexels, or Pixabay.</span><span class="italian">Le immagini utilizzate sono prive di copyright da fonti come Unsplash, Pexels o Pixabay.</span></p>
+            <a href="https://github.com/doriancodes/emotion_gallery" class="github-link">
+                <i class="fab fa-github"></i>
+                <span class="english">View on GitHub</span>
+                <span class="italian">Vedi su GitHub</span>
+            </a>
         </div>
     </footer>
     
